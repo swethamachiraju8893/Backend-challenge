@@ -1,11 +1,13 @@
  package com.example.demo.db.entity;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -20,6 +22,19 @@ import javax.persistence.TemporalType;
 	@Temporal(TemporalType.DATE)
 	private Date birthDate;
 	private String PhoneNumber;
+	@OneToMany(mappedBy="enrollee")
+	private Set<Dependent> dependents;
+
+	public Enrollee() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Enrollee( String name, Date birthDate, String phoneNumber) {
+		super();
+		this.name = name;
+		this.birthDate = birthDate;
+		PhoneNumber = phoneNumber;
+	}
 	
 	public Long getId() {
 		return Id;
@@ -51,7 +66,12 @@ import javax.persistence.TemporalType;
 	public void setPhoneNumber(String phoneNumber) {
 		PhoneNumber = phoneNumber;
 	}
-	
-	
+	public Set<Dependent> getDependents() {
+		return dependents;
+	}
+	public void setDependents(Set<Dependent> dependents) {
+		this.dependents = dependents;
+	}
+
 	
 }
