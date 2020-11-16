@@ -28,4 +28,23 @@ public class EnrolleeService {
 		// TODO Auto-generated method stub
 		return  repo.save(enrollee);
 	}
+
+	public Enrollee modifyExistingEnrollee(Enrollee newEnrollee, Long id) {
+		// TODO Auto-generated method stub
+		return repo.findById(id)
+			      .map(enrollee -> {
+			    	  enrollee.setName(newEnrollee.getName());
+			    	  enrollee.setBirthDate(newEnrollee.getBirthDate());
+			          return repo.save(enrollee);
+			        })
+			        .orElseGet(() -> {
+			        	newEnrollee.setId(id);
+			          return repo.save(newEnrollee);
+			        });
+	}
+
+	public void delete(Long id) {
+		// TODO Auto-generated method stub
+		repo.deleteById(id);
+	}
 }

@@ -3,6 +3,7 @@
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,7 +23,7 @@ import javax.persistence.TemporalType;
 	@Temporal(TemporalType.DATE)
 	private Date birthDate;
 	private String PhoneNumber;
-	@OneToMany(mappedBy="enrollee")
+	@OneToMany(mappedBy="enrollee", cascade = CascadeType.ALL, orphanRemoval=true)
 	private Set<Dependent> dependents;
 
 	public Enrollee() {
